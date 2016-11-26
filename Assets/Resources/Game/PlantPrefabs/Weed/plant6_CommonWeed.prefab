@@ -41,6 +41,7 @@ GameObject:
   - 23: {fileID: 23000010245472554}
   - 114: {fileID: 114000010426037300}
   - 114: {fileID: 114000010028220322}
+  - 114: {fileID: 114000010723847988}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -145,9 +146,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd3775f327da10429205d601e2afb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos_perturbAmt: 0.14
+  pos_perturbAmt: 0.05
   scale_perturbPercent: 0.098
-  rotat_perturbAmt: 10
+  rotat_perturbAmt: 5
+--- !u!114 &114000010723847988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013816082470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1d47fe7788c6e42a17ad68588866cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crumpleSpeed: 0.6
 --- !u!114 &114000011220186416
 MonoBehaviour:
   m_ObjectHideFlags: 1

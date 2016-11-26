@@ -19,6 +19,20 @@ public class PlantManager : MonoBehaviour {
 
 
 		CreatePlant (0, new GridCoordinates (1, 1));
+		CreatePlant (0, new GridCoordinates (1, 0));
+		CreatePlant (0, new GridCoordinates (1, 2));
+		CreatePlant (0, new GridCoordinates (2, 2));
+		CreatePlant (0, new GridCoordinates (3, 2));
+
+
+		for (int i = 0; i < gridman.width; i++) {
+			for (int j = 0; j < gridman.height; j++) {
+				if (Random.value < 0.1f) {
+					CreatePlant (0, new GridCoordinates (i, j));
+				}
+			}
+		}
+
 
 		}
 	

@@ -41,8 +41,8 @@ public struct GridCoordinates {
 		float y = x;
 		float z = position.z;
 
-		int iX = Mathf.RoundToInt(x);
-		int iZ = Mathf.RoundToInt(z);
+		int iX = Mathf.RoundToInt(x*2f);
+		int iZ = Mathf.RoundToInt(z*2f);
 
 		return new GridCoordinates(iX, iZ);
 	}
