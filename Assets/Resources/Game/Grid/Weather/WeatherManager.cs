@@ -9,6 +9,8 @@ public class WeatherManager : MonoBehaviour {
 	public WeatherType currentWeather = WeatherType.clear;
 	public WeatherType lastweather = WeatherType.clear;
 
+	int weatherTimer = 5;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -20,14 +22,42 @@ public class WeatherManager : MonoBehaviour {
 	}
 
 	public void ChangeWeather(){
+		if (weatherTimer <= 0) {
+			WeatherUpdate ();
+			weatherTimer = Random.Range (3,5)+Random.Range (3, 10);
+		} else {
+			weatherTimer--;
+		}
+	}
+
+	void WeatherUpdate(){
 		lastweather = currentWeather;
 		float rand = Random.value;
-		if (rand < 0.5f) {
-			currentWeather = WeatherType.clear;
-		} else if (rand < 0.8f) {
-			currentWeather = WeatherType.cloudy;
-		} else {
-			currentWeather = WeatherType.rain;
+
+		if (currentWeather == WeatherType.clear) {
+			if (rand < 0.4f) {
+				currentWeather = WeatherType.clear;
+			} else if (rand < 0.95f) {
+				currentWeather = WeatherType.cloudy;
+			} else {
+				currentWeather = WeatherType.rain;
+			}
+		} else if (currentWeather == WeatherType.cloudy) {
+			if (rand < 0.5f) {
+				currentWeather = WeatherType.clear;
+			} else if (rand < 0.75f) {
+				currentWeather = WeatherType.cloudy;
+			} else {
+				currentWeather = WeatherType.rain;
+			}
+		} else if (currentWeather == WeatherType.rain) {
+			if (rand < 0.1f) {
+				currentWeather = WeatherType.clear;
+			} else if (rand < 0.7f) {
+				currentWeather = WeatherType.cloudy;
+			} else {
+				currentWeather = WeatherType.rain;
+			}
 		}
 
 		if(currentWeather != lastweather){
