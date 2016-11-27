@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridman: {fileID: 683983157}
-  moveSpeed: 0.4
+  moveSpeed: 0.6
   currentCell: {fileID: 0}
 --- !u!4 &247863244
 Transform:
@@ -269,8 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mymove: {fileID: 247863243}
-  waterAmount: 25
-  nutrientAmount: 40
+  gridman: {fileID: 683983157}
 --- !u!1 &276524223
 GameObject:
   m_ObjectHideFlags: 0

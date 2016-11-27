@@ -4,10 +4,9 @@ using System.Collections;
 public class PlayerActions : MonoBehaviour {
 
 	public PlayerMovement mymove;
-	string currentAction = "water";
-	public float waterAmount = 0;
-	public float nutrientAmount = 0;
-
+	public GridManager gridman;
+	bool clicked = false;
+	Vector2 menuLoc = Vector2.zero;
 
 	// Use this for initialization
 	void Start () {
@@ -16,51 +15,43 @@ public class PlayerActions : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		if (Input.GetMouseButtonDown(1)) {
-//			if (currentAction == "water") {
-//				Water (mymove.currentCell);
-//			} else if (currentAction == "nutrient") {
-//				Nutrient (mymove.currentCell);
-//			} else if (currentAction == "trim") {
-//				Trim (mymove.currentCell);
-//			}
-//		}
-	}
 
-	public void SetAction(string action){
-		currentAction = action;
-	}
+		if (Input.GetMouseButtonDown(1)) {
 
-	public void DoAction(string action){
-		SetAction (action);
-		if (currentAction == "water") {
-			Water (mymove.currentCell);
-		} else if (currentAction == "nutrient") {
-			Nutrient (mymove.currentCell);
-		} else if (currentAction == "trim") {
-			Trim (mymove.currentCell);
+
+			HandleInput ();
 		}
 	}
 
-	void Water(GridCell cell){
-//		cell.GetComponent<GridResources> ().ChangeResourceAmt (ResourceType.B, waterAmount);
-//		for (int i = 0; i < cell.neighbors.Length; i++) {
-//			if (cell.neighbors [i] != null) {
-//				cell.neighbors [i].GetComponent<GridResources> ().ChangeResourceAmt (ResourceType.B, waterAmount);
-//			}
-//		}
-	}
+	void HandleInput () {
+		clicked = true;
+		menuLoc = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast(inputRay, out hit)) {
+			Vector3 position = hit.point;
 
-	void Nutrient(GridCell cell){
-		//cell.GetComponent<GridResources> ().ChangeResourceAmt (ResourceType.G, nutrientAmount);
-	}
+			GridCell cell = CellAtPosition (position);
 
-	void Trim(GridCell cell){
-		if (cell.plantincell != null) {
-			Destroy (cell.plantincell.gameObject);
-			cell.plantincell = null;
+			cell.gameObject.SetActive (false);
 		}
 	}
 
+
+
+	GridCell CellAtPosition(Vector3 pos){
+		GridCoordinates coordinates = GridCoordinates.FromPosition (pos);
+		GridCell cell = gridman.GetCell (coordinates);
+		return cell;
+	}
+
+	void OnGUI() {
+		if (clicked) {
+			if (GUI.Button(new Rect(menuLoc.x, Screen.height- menuLoc.y, 150, 100), "I am a button"))
+				print("You clicked the button!");
+			
+		}
+
+	}
 
 }
