@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantPrefabs:
+  - {fileID: 114000011220186416, guid: 9dd855a9cbbd4e94eb880f7dba63c497, type: 2}
   - {fileID: 114000011220186416, guid: bc42c8721c3df544ca6f94143de07a8b, type: 2}
   plants: []
   gridman: {fileID: 683983157}
