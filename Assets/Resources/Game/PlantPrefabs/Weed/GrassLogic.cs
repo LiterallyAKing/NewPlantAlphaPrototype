@@ -55,7 +55,7 @@ public class GrassLogic : MonoBehaviour {
 		//REPRODUCE
 		bool canPlant = true;
 		//if (growState_current == growState_total) {
-			if (mygridstats.Light >= -1 && mygridstats.Water >= -1) {
+			if (mygridstats.Light >= -1 && mygridstats.Water >= 1) {
 				for (int i = 0; i < mycell.neighbors.Length; i++) {
 					if (canPlant) {
 						if (mycell.neighbors [i] != null) {

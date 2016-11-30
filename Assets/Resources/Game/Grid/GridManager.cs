@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//[ExecuteInEditMode]
 public class GridManager : MonoBehaviour {
 	public int width;//x
 	public int height;//z
@@ -18,9 +19,11 @@ public class GridManager : MonoBehaviour {
 		gridMesh = GetComponentInChildren<GridMesh>();
 		cells = new GridCell[height * width];
 
-		for (int z = 0, i = 0; z < height; z++) {
-			for (int x = 0; x < width; x++) {
-				CreateCell (x, z, i++);
+		if (this.transform.childCount == 0) {
+			for (int z = 0, i = 0; z < height; z++) {
+				for (int x = 0; x < width; x++) {
+					CreateCell (x, z, i++);
+				}
 			}
 		}
 	}
