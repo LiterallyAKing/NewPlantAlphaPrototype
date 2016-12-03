@@ -14,7 +14,7 @@ public class PlantProcessManager : MonoBehaviour {
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Space) || autoProcess.IsFinished()) {
 			weatherman.ChangeWeather ();
-			DoPlantProcess ();
+			//DoPlantProcess ();
 		}
 	}
 

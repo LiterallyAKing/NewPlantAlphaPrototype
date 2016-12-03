@@ -17,19 +17,26 @@ public class GridManager : MonoBehaviour {
 	void Awake(){
 		gridCanvas = GetComponentInChildren<Canvas> ();
 		gridMesh = GetComponentInChildren<GridMesh>();
-		cells = new GridCell[height * width];
+		//cells = new GridCell[height * width];
 
-		if (this.transform.childCount == 0) {
-			for (int z = 0, i = 0; z < height; z++) {
-				for (int x = 0; x < width; x++) {
-					CreateCell (x, z, i++);
-				}
-			}
-		}
+
 	}
 
 	void Start(){
+
 	}
+
+//	void OnEnable(){
+//		//This was to instantiate the grid cells in edit mode. Now not used.
+//				if (this.transform.childCount == 0) {
+//					cells = new GridCell[height * width];
+//					for (int z = 0, i = 0; z < height; z++) {
+//						for (int x = 0; x < width; x++) {
+//							CreateCell (x, z, i++);
+//						}
+//					}
+//				}
+//	}
 
 	void CreateCell(int x, int z, int i){
 		//Setting physical location

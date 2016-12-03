@@ -17,6 +17,28 @@ public class WeedLogic : MonoBehaviour {
 		mycell = myplantlog.mycell;
 		mygridstats = myplantlog.mycellStats;
 		transform.localScale = minSize;
+
+		player = GameObject.Find ("Player").transform;
+	}
+
+	float growtimer = 0;
+	float growdelay = 1f;
+	float speedmultiplier = 1f;
+	Transform player;
+	void Update(){
+		float dist = Vector3.Distance (transform.position, player.position);
+		if (dist > 5f) {
+			speedmultiplier = 0.1f;
+		} else {
+			speedmultiplier = 5f - (4.9f * (dist / 10f));
+		}
+
+		growtimer += (Time.deltaTime * speedmultiplier);
+		if (growtimer > growdelay) {
+			PlantLogicProcess ();
+			growtimer = 0f;
+		}
+
 	}
 	
 	public void PlantLogicProcess(){
@@ -26,7 +48,7 @@ public class WeedLogic : MonoBehaviour {
 			//Dead
 		}
 		//GROW
-		if(mygridstats.Light >= 0 && mygridstats.Water >= -1){
+		if(mygridstats.Light >= -1 && mygridstats.Water >= -1){
 			if (growState_current < growState_total) {
 				growState_current++;
 				float newSize;
@@ -38,7 +60,7 @@ public class WeedLogic : MonoBehaviour {
 		//REPRODUCE
 		bool canPlant = true;
 		if (growState_current == growState_total) {
-			if (mygridstats.Light >= -1 && mygridstats.Water >= 1) {
+			if (mygridstats.Light >= -1 && mygridstats.Water >= -1) {
 				for (int i = 0; i < mycell.neighbors.Length; i++) {
 					if (canPlant) {
 						if (mycell.neighbors [i] != null) {
