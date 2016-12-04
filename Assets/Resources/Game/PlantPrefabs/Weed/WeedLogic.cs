@@ -87,7 +87,7 @@ public class WeedLogic : MonoBehaviour {
 											}
 										}
 									}
-									if (plantsnearby > 3) {
+									if (plantsnearby >= 3) {
 										myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
 										canPlant = false;
 										return;
@@ -97,8 +97,6 @@ public class WeedLogic : MonoBehaviour {
 						}
 					}
 				}
-			} else {
-				print ("L:" + mygridstats.Light + " W:" + mygridstats.Water);
 			}
 		}
 
