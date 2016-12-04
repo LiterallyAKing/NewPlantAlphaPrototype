@@ -190,6 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf1fd6037036a04b9751e45bda1ab8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myplantlog: {fileID: 0}
+  myplantlog: {fileID: 114000011220186416}
   minSize: {x: 0, y: 0, z: 0}
   maxSize: {x: 0, y: 0, z: 0}
