@@ -3,6 +3,17 @@ using System.Collections;
 
 public class WeedLogic : MonoBehaviour {
 
+	[System.Serializable]
+	public class PlantTriggers
+	{
+		public int minLight_grow = 0;
+		public int minWater_grow = -1;
+		public int minLight_spread = -1;
+		public int minWater_spread = 1;
+	}
+	[SerializeField] public PlantTriggers planttriggers;
+
+	[Space(5)]
 	public PlantLogistics myplantlog;
 	private GridCell mycell;
 	private GridStats mygridstats;
@@ -48,7 +59,7 @@ public class WeedLogic : MonoBehaviour {
 			//Dead
 		}
 		//GROW
-		if(mygridstats.Light >= -1 && mygridstats.Water >= -1){
+		if(mygridstats.Light >= planttriggers.minLight_grow && mygridstats.Water >= planttriggers.minWater_grow){
 			if (growState_current < growState_total) {
 				growState_current++;
 				float newSize;
@@ -60,7 +71,7 @@ public class WeedLogic : MonoBehaviour {
 		//REPRODUCE
 		bool canPlant = true;
 		if (growState_current == growState_total) {
-			if (mygridstats.Light >= -1 && mygridstats.Water >= -1) {
+			if (mygridstats.Light >= planttriggers.minLight_spread && mygridstats.Water >= planttriggers.minWater_spread) {
 				for (int i = 0; i < mycell.neighbors.Length; i++) {
 					if (canPlant) {
 						if (mycell.neighbors [i] != null) {
@@ -76,7 +87,7 @@ public class WeedLogic : MonoBehaviour {
 											}
 										}
 									}
-									if (plantsnearby > 2) {
+									if (plantsnearby > 3) {
 										myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
 										canPlant = false;
 										return;
@@ -86,6 +97,8 @@ public class WeedLogic : MonoBehaviour {
 						}
 					}
 				}
+			} else {
+				print ("L:" + mygridstats.Light + " W:" + mygridstats.Water);
 			}
 		}
 

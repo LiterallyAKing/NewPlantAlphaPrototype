@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 public class WeatherManager : MonoBehaviour {
+
+	public bool forceRain = false;
+
+
 	public Text uiText;
 
 	public GridManager gridman;
@@ -24,7 +28,7 @@ public class WeatherManager : MonoBehaviour {
 	public void ChangeWeather(){
 		if (weatherTimer <= 0) {
 			WeatherUpdate ();
-			weatherTimer = Random.Range (3,5)+Random.Range (3, 10);
+			weatherTimer = Random.Range (1,3)+Random.Range (3, 7);
 		} else {
 			weatherTimer--;
 		}
@@ -37,15 +41,15 @@ public class WeatherManager : MonoBehaviour {
 		if (currentWeather == WeatherType.clear) {
 			if (rand < 0.4f) {
 				currentWeather = WeatherType.clear;
-			} else if (rand < 0.95f) {
+			} else if (rand < 0.8f) {
 				currentWeather = WeatherType.cloudy;
 			} else {
 				currentWeather = WeatherType.rain;
 			}
 		} else if (currentWeather == WeatherType.cloudy) {
-			if (rand < 0.5f) {
+			if (rand < 0.3f) {
 				currentWeather = WeatherType.clear;
-			} else if (rand < 0.75f) {
+			} else if (rand < 0.7f) {
 				currentWeather = WeatherType.cloudy;
 			} else {
 				currentWeather = WeatherType.rain;
@@ -58,6 +62,10 @@ public class WeatherManager : MonoBehaviour {
 			} else {
 				currentWeather = WeatherType.rain;
 			}
+		}
+		if (forceRain) {
+
+			currentWeather = WeatherType.rain;
 		}
 
 		if(currentWeather != lastweather){
