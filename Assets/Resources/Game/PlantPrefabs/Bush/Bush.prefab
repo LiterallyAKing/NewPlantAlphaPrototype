@@ -191,5 +191,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myplantlog: {fileID: 114000011220186416}
-  minSize: {x: 0, y: 0, z: 0}
-  maxSize: {x: 0, y: 0, z: 0}
+  minSize: {x: 0.1, y: 0.2, z: 0}
+  maxSize: {x: 1, y: 1, z: 0}
