@@ -14,7 +14,7 @@ public class WeedLogic : MonoBehaviour {
 	[SerializeField] public PlantTriggers planttriggers;
 
 	[Space(5)]
-	public PlantLogistics myplantlog;
+	public Plant_LocationManager myplantlog;
 	private GridCell mycell;
 	private GridStats mygridstats;
 	public Vector3 minSize;
@@ -115,7 +115,7 @@ public class WeedLogic : MonoBehaviour {
 										}
 									}
 									if (plantsnearby >= 3 && plantsnearby <= 6) {
-										myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
+										//myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
 										canPlant = false;
 										return;
 									}

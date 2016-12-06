@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlantManager : MonoBehaviour {
 
-	public PlantLogistics[] plantPrefabs;
+	public Plant_MasterManager[] plantPrefabs;
 	public List<GameObject> plants = new List<GameObject> ();
 
 	public GridManager gridman;
@@ -32,13 +32,13 @@ public class PlantManager : MonoBehaviour {
 				}
 			}
 		}
-		for (int i = 0; i < gridman.width; i++) {
-			for (int j = 0; j < gridman.height; j++) {
-				if (Random.value < 0.03f) {
-					CreatePlant (1, new GridCoordinates (i, j));
-				}
-			}
-		}
+//		for (int i = 0; i < gridman.width; i++) {
+//			for (int j = 0; j < gridman.height; j++) {
+//				if (Random.value < 0.03f) {
+//					CreatePlant (1, new GridCoordinates (i, j));
+//				}
+//			}
+//		}
 
 		}
 	
@@ -58,29 +58,80 @@ public class PlantManager : MonoBehaviour {
 			pos.y = 0f;
 			pos.z = coord.Z * GridMetrics.innerRadius;
 			if (!(gridman.GetCell (coord).plantincell != null)) {
-				PlantLogistics newplant = Instantiate<PlantLogistics> (plantPrefabs [index]);
+				Plant_MasterManager newplant = Instantiate<Plant_MasterManager> (plantPrefabs [index]);
 				plants.Add (newplant.gameObject);
 				newplant.transform.SetParent (transform, false);
-				newplant.myplantman = this;
-				newplant.myPlantIndex = index;
+				newplant.plantmanager = this;
+				//newplant.myPlantIndex = index;
 				newplant.transform.localPosition = pos;
-				newplant.mycoord = coord;
-				newplant.mycell = gridman.GetCell (coord);
-				newplant.mycellStats = newplant.mycell.GetComponent<GridStats> ();
-				gridman.GetCell (coord).plantincell = newplant;
+				newplant.locmanager.mycoord = coord;
+				newplant.locmanager.mycell = gridman.GetCell (coord);
+				newplant.locmanager.mycellStats = newplant.locmanager.mycell.GetComponent<GridStats> ();
+				gridman.GetCell (coord).plantincell = newplant.locmanager;
 			}
 		}
 	}
 
-	int CountPlant(int index){
+
+	public bool DoesCellContainPlant(GridCell cell) {
+		return cell.occupied;
+	}
+	public bool DoesCellContainPlant(GridCoordinates coord) {
+		bool toreturn = false;
+		if (DoesCellContainPlant(gridman.GetCell(coord))) {
+			toreturn = true;
+		}
+		return toreturn;
+	}
+	public bool DoesCellContainPlant(GridCell cell, PlantType_Base planttype) {
+		bool toreturn = false;
+		if (DoesCellContainPlant(cell)) {
+			toreturn = cell.plantincell.GetComponent<PlantType_Base> ().GetType() == planttype.GetType();
+		}
+		return toreturn;
+	}
+	public bool DoesCellContainPlant(GridCoordinates coord, PlantType_Base planttype) {
+		bool toreturn = false;
+		GridCell celltocheck = gridman.GetCell (coord);
+		toreturn = DoesCellContainPlant (celltocheck, planttype);
+		return toreturn;
+	}
+
+	public int HowManyPlantsAroundCell(GridCell cell){
 		int toreturn = 0;
-		for (int i = 0; i < plants.Count - 1; i++) {
-			if (plants [i].GetComponent<PlantLogistics> ().myPlantIndex == index) {
+		List<GridCell> cellstocheck;
+		cellstocheck = cell.GetNeighbors ();
+		for (int i = 0; i < cellstocheck.Count; i++) {
+			if (DoesCellContainPlant (cellstocheck [i])) {
 				toreturn++;
 			}
 		}
 		return toreturn;
 	}
+	public int HowManyPlantsAroundCell(GridCoordinates coord){
+		int toreturn = 0;
+		GridCell celltocheck = gridman.GetCell (coord);
+		toreturn = HowManyPlantsAroundCell (celltocheck);
+		return toreturn;
+	}
+	public int HowManyPlantsAroundCell(GridCell cell, PlantType_Base planttype){
+		int toreturn = 0;
+		List<GridCell> cellstocheck;
+		cellstocheck = cell.GetNeighbors ();
+		for (int i = 0; i < cellstocheck.Count; i++) {
+			if (DoesCellContainPlant (cellstocheck [i], planttype)) {
+				toreturn++;
+			}
+		}
+		return toreturn;
+	}
+	public int HowManyPlantsAroundCell(GridCoordinates coord, PlantType_Base planttype){
+		int toreturn = 0;
+		GridCell celltocheck = gridman.GetCell (coord);
+		toreturn = HowManyPlantsAroundCell (celltocheck, planttype);
+		return toreturn;
+	}
+
 
 
 }

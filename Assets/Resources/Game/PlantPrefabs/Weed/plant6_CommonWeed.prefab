@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010738949692}
-  - 114: {fileID: 114000011220186416}
   - 114: {fileID: 114000014132531664}
+  - 114: {fileID: 114000010031902826}
   m_Layer: 0
   m_Name: plant6_CommonWeed
   m_TagString: Untagged
@@ -135,6 +135,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2eec89d55096a45811ce2f77b0a964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000010031902826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012258152532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f147b87da1a03145a4cb193b3a2f68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mymanager: {fileID: 0}
+  moveState: 0
+  mycoord:
+    x: 0
+    z: 0
+  mycell: {fileID: 0}
+  mycellStats: {fileID: 0}
 --- !u!114 &114000010426037300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,30 +173,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013816082470}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f1d47fe7788c6e42a17ad68588866cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crumpleSpeed: 0.6
---- !u!114 &114000011220186416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012258152532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59047f09665e3ad439c812192d5917f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mycoord:
-    x: 0
-    z: 0
-  mycell: {fileID: 0}
-  mycellStats: {fileID: 0}
-  myplantman: {fileID: 0}
-  myPlantIndex: 0
 --- !u!114 &114000014132531664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +195,6 @@ MonoBehaviour:
     minWater_grow: -1
     minLight_spread: -1
     minWater_spread: 1
-  myplantlog: {fileID: 114000011220186416}
+  myplantlog: {fileID: 114000010031902826}
   minSize: {x: 0.2, y: 0.2, z: 0.2}
   maxSize: {x: 1, y: 1, z: 1}
