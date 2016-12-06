@@ -57,7 +57,34 @@ public class WeedLogic : MonoBehaviour {
 		//DEATH
 		if(mygridstats.Water == -2){
 			//Dead
+
+
+
 		}
+		int plantneighbors = 0;
+		for (int i = 0; i < mycell.neighbors.Length; i++) {
+			if (mycell.neighbors [i] != null) {
+				if (mycell.neighbors [i].plantincell != null) {
+					if (mycell.neighbors [i].plantincell.gameObject.name == this.gameObject.name) {
+						plantneighbors++;
+					}
+				}
+			}
+		}
+		if (plantneighbors >= 7 || plantneighbors <= 0) {
+			growState_current--;
+			growState_current--;
+			if (growState_current <= 0) {
+				Destroy (this.gameObject);
+			} else {
+
+				float newSize;
+				newSize = ((float)growState_current / (float)growState_total);
+				transform.localScale = ((maxSize - minSize) * newSize) + minSize;
+			}
+		}
+
+
 		//GROW
 		if(mygridstats.Light >= planttriggers.minLight_grow && mygridstats.Water >= planttriggers.minWater_grow){
 			if (growState_current < growState_total) {
@@ -87,7 +114,7 @@ public class WeedLogic : MonoBehaviour {
 											}
 										}
 									}
-									if (plantsnearby >= 3) {
+									if (plantsnearby >= 3 && plantsnearby <= 6) {
 										myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
 										canPlant = false;
 										return;
