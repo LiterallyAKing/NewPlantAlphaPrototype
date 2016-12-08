@@ -33,7 +33,7 @@ public class PlayerActions : MonoBehaviour {
 
 			GridCell cell = CellAtPosition (position);
 
-			cell.gameObject.SetActive (false);
+			//cell.gameObject.SetActive (false);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class PlayerActions : MonoBehaviour {
 
 	void OnGUI() {
 		if (clicked) {
-			if (GUI.Button(new Rect(menuLoc.x, Screen.height- menuLoc.y, 150, 100), "I am a button"))
+			if (GUI.Button(new Rect(menuLoc.x, Screen.height- menuLoc.y, 75, 50), "Pick Up"))
 				print("You clicked the button!");
 			
 		}

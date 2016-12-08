@@ -145,3 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665dfc594a7dd7746bd1f6ead170467a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mycell: {fileID: 114000010122953894}
+  baseLight: 0
+  baseWater: 0
+  baseHeat: 0

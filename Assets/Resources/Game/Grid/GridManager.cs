@@ -9,7 +9,6 @@ public class GridManager : MonoBehaviour {
 	public GridCell cellPrefab;
 	public GridCell[] cells;
 	public Text cellLabelPrefab;
-	public PlantMakerManager plantmaker;
 	Canvas gridCanvas;
 
 	GridMesh gridMesh;
@@ -200,7 +199,6 @@ public class GridManager : MonoBehaviour {
 		GridCoordinates coordinates = GridCoordinates.FromPosition (position);
 		int index = coordinates.X + (coordinates.Z * width);
 		GridCell cell = cells [index];
-		plantmaker.MakePlant (coordinates);
 	}
 
 }

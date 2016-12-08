@@ -18,17 +18,17 @@ public class PlantManager : MonoBehaviour {
 		z_length = gridman.height;
 
 
-		CreatePlant (0, new GridCoordinates (1, 1));
-		CreatePlant (0, new GridCoordinates (1, 0));
-		CreatePlant (0, new GridCoordinates (1, 2));
-		CreatePlant (0, new GridCoordinates (2, 2));
-		CreatePlant (0, new GridCoordinates (3, 2));
-
+//		CreatePlant (0, new GridCoordinates (1, 1));
+//		CreatePlant (0, new GridCoordinates (1, 0));
+//		CreatePlant (0, new GridCoordinates (1, 2));
+//		CreatePlant (0, new GridCoordinates (2, 2));
+//		CreatePlant (0, new GridCoordinates (3, 2));
+//
 
 		for (int i = 0; i < gridman.width; i++) {
 			for (int j = 0; j < gridman.height; j++) {
 				if (Random.value < 0.15f) {
-					CreatePlant (0, new GridCoordinates (i, j));
+					CreatePlant (typeof(PlantType_Weed), new GridCoordinates (i, j));
 				}
 			}
 		}
@@ -44,33 +44,51 @@ public class PlantManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-
-
 	}
 
-
-	public void CreatePlant(int index, GridCoordinates coord){
-		if (index + 1 <= plantPrefabs.Length) {
-			Vector3 pos;
-			pos.x = coord.X * GridMetrics.innerRadius;
-			pos.y = 0f;
-			pos.z = coord.Z * GridMetrics.innerRadius;
-			if (!(gridman.GetCell (coord).plantincell != null)) {
-				Plant_MasterManager newplant = Instantiate<Plant_MasterManager> (plantPrefabs [index]);
-				plants.Add (newplant.gameObject);
-				newplant.transform.SetParent (transform, false);
-				newplant.plantmanager = this;
-				//newplant.myPlantIndex = index;
-				newplant.transform.localPosition = pos;
-				newplant.locmanager.mycoord = coord;
-				newplant.locmanager.mycell = gridman.GetCell (coord);
-				newplant.locmanager.mycellStats = newplant.locmanager.mycell.GetComponent<GridStats> ();
-				gridman.GetCell (coord).plantincell = newplant.locmanager;
+//
+//	public void CreatePlant(int index, GridCoordinates coord){
+//		if (index + 1 <= plantPrefabs.Length) {
+//			Vector3 pos;
+//			pos.x = coord.X * GridMetrics.innerRadius;
+//			pos.y = 0f;
+//			pos.z = coord.Z * GridMetrics.innerRadius;
+//			if (!(gridman.GetCell (coord).plantincell != null)) {
+//				Plant_MasterManager newplant = Instantiate<Plant_MasterManager> (plantPrefabs [index]);
+//				plants.Add (newplant.gameObject);
+//				newplant.transform.SetParent (transform, false);
+//				newplant.plantmanager = this;
+//				//newplant.myPlantIndex = index;
+//				newplant.transform.localPosition = pos;
+//				newplant.locmanager.mycoord = coord;
+//				newplant.locmanager.mycell = gridman.GetCell (coord);
+//				newplant.locmanager.mycellStats = newplant.locmanager.mycell.GetComponent<GridStats> ();
+//				gridman.GetCell (coord).plantincell = newplant.locmanager;
+//			}
+//		}
+//	}
+//
+	public void CreatePlant(System.Type type, GridCoordinates coord){
+		if (!gridman.GetCell (coord).occupied) {
+			Plant_MasterManager toinstantiate = null;
+			foreach (Plant_MasterManager prefab in plantPrefabs) {
+				if (prefab.planttypelogic.GetType () == type) {
+					toinstantiate = prefab;
+				}
 			}
+
+			Plant_MasterManager newplant = Instantiate<Plant_MasterManager> (toinstantiate);
+			newplant.transform.SetParent (this.transform, false);
+			newplant.plantmanager = this;
+			newplant.locmanager.SetMyLocation (coord);
+
+			plants.Add (newplant.gameObject);
+
+
 		}
 	}
+
+
 
 
 	public bool DoesCellContainPlant(GridCell cell) {

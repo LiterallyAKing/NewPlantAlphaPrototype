@@ -95,7 +95,7 @@ public class BushLogic : MonoBehaviour {
 									}
 									if (plantsnearby >= 0 && plantsnearby <= 2) {
 										if (KillNeighbor ()) {
-											myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
+											//myplantlog.myplantman.CreatePlant (myplantlog.myPlantIndex, mycell.neighbors [i].coordinates);
 											canPlant = false;
 											return;
 										}

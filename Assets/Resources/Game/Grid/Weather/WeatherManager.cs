@@ -86,9 +86,9 @@ public class WeatherManager : MonoBehaviour {
 					newwater = 1;
 					newheat = 0;
 				}
-				stat.Light = newlight;
-				stat.Water = newwater;
-				stat.Heat = newheat;
+				stat.baseLight = newlight;
+				stat.baseWater = newwater;
+				stat.baseHeat = newheat;
 		}
 			string desc = "";
 			if (currentWeather == WeatherType.clear) {
