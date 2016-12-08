@@ -15,6 +15,8 @@ public class WeatherManager : MonoBehaviour {
 
 	int weatherTimer = 5;
 
+	public ParticleSystem raineffect;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -99,6 +101,17 @@ public class WeatherManager : MonoBehaviour {
 				desc = "Rain";
 			}
 			uiText.text = desc;
+
+			if (currentWeather == WeatherType.clear) {
+				raineffect.Stop ();
+			} else if (currentWeather == WeatherType.cloudy) {
+				raineffect.Stop ();
+			} else if (currentWeather == WeatherType.rain) {
+				raineffect.Play ();
+			}
+
+
+
 		}
 
 

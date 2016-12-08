@@ -29,16 +29,28 @@ public class Plant_LocationManager : MonoBehaviour {
 	}
 
 
-	public void SetMyLocation(GridCoordinates coord){
-		Vector3 pos;
-		pos.x = coord.X * GridMetrics.innerRadius;
-		pos.y = 0f;
-		pos.z = coord.Z * GridMetrics.innerRadius;
-		transform.localPosition = pos;
-		mycoord = coord;
-		mycell = mymanager.plantmanager.gridman.GetCell (coord);
-		mycellStats = mycell.GetComponent<GridStats> ();
-		mycell.plantincell = this;
+	public void SetMyGridLocation(GridCoordinates coord){
+		if (!mymanager.plantmanager.gridman.GetCell(coord).occupied){
+			Vector3 pos;
+			pos.x = coord.X * GridMetrics.innerRadius;
+			pos.y = 0f;
+			pos.z = coord.Z * GridMetrics.innerRadius;
+			transform.localPosition = pos;
+			mycoord = coord;
+			mycell = mymanager.plantmanager.gridman.GetCell (coord);
+			mycellStats = mycell.GetComponent<GridStats> ();
+			mycell.plantincell = this;
+		}
+	}
+
+	public void Uproot(){
+		if (moveState == MoveState.inground) {
+			
+			mycell.plantincell = null;
+			mycell = null;
+			mycellStats = null;
+			moveState = MoveState.carried;
+		}
 	}
 
 }

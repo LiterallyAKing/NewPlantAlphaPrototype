@@ -18,12 +18,8 @@ public class PlantManager : MonoBehaviour {
 		z_length = gridman.height;
 
 
-//		CreatePlant (0, new GridCoordinates (1, 1));
-//		CreatePlant (0, new GridCoordinates (1, 0));
-//		CreatePlant (0, new GridCoordinates (1, 2));
-//		CreatePlant (0, new GridCoordinates (2, 2));
-//		CreatePlant (0, new GridCoordinates (3, 2));
-//
+
+		CreatePlant (typeof(PlantType_Weed), new GridCoordinates (1, 5));
 
 		for (int i = 0; i < gridman.width; i++) {
 			for (int j = 0; j < gridman.height; j++) {
@@ -32,13 +28,7 @@ public class PlantManager : MonoBehaviour {
 				}
 			}
 		}
-//		for (int i = 0; i < gridman.width; i++) {
-//			for (int j = 0; j < gridman.height; j++) {
-//				if (Random.value < 0.03f) {
-//					CreatePlant (1, new GridCoordinates (i, j));
-//				}
-//			}
-//		}
+
 
 		}
 	
@@ -46,28 +36,7 @@ public class PlantManager : MonoBehaviour {
 	void Update () {
 	}
 
-//
-//	public void CreatePlant(int index, GridCoordinates coord){
-//		if (index + 1 <= plantPrefabs.Length) {
-//			Vector3 pos;
-//			pos.x = coord.X * GridMetrics.innerRadius;
-//			pos.y = 0f;
-//			pos.z = coord.Z * GridMetrics.innerRadius;
-//			if (!(gridman.GetCell (coord).plantincell != null)) {
-//				Plant_MasterManager newplant = Instantiate<Plant_MasterManager> (plantPrefabs [index]);
-//				plants.Add (newplant.gameObject);
-//				newplant.transform.SetParent (transform, false);
-//				newplant.plantmanager = this;
-//				//newplant.myPlantIndex = index;
-//				newplant.transform.localPosition = pos;
-//				newplant.locmanager.mycoord = coord;
-//				newplant.locmanager.mycell = gridman.GetCell (coord);
-//				newplant.locmanager.mycellStats = newplant.locmanager.mycell.GetComponent<GridStats> ();
-//				gridman.GetCell (coord).plantincell = newplant.locmanager;
-//			}
-//		}
-//	}
-//
+
 	public void CreatePlant(System.Type type, GridCoordinates coord){
 		if (!gridman.GetCell (coord).occupied) {
 			Plant_MasterManager toinstantiate = null;
@@ -80,10 +49,9 @@ public class PlantManager : MonoBehaviour {
 			Plant_MasterManager newplant = Instantiate<Plant_MasterManager> (toinstantiate);
 			newplant.transform.SetParent (this.transform, false);
 			newplant.plantmanager = this;
-			newplant.locmanager.SetMyLocation (coord);
+			newplant.locmanager.SetMyGridLocation (coord);
 
 			plants.Add (newplant.gameObject);
-
 
 		}
 	}
