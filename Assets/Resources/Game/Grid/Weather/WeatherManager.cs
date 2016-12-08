@@ -41,9 +41,9 @@ public class WeatherManager : MonoBehaviour {
 		float rand = Random.value;
 
 		if (currentWeather == WeatherType.clear) {
-			if (rand < 0.4f) {
+			if (rand < 0.5f) {
 				currentWeather = WeatherType.clear;
-			} else if (rand < 0.8f) {
+			} else if (rand < 0.55f) {
 				currentWeather = WeatherType.cloudy;
 			} else {
 				currentWeather = WeatherType.rain;
@@ -51,15 +51,15 @@ public class WeatherManager : MonoBehaviour {
 		} else if (currentWeather == WeatherType.cloudy) {
 			if (rand < 0.3f) {
 				currentWeather = WeatherType.clear;
-			} else if (rand < 0.7f) {
+			} else if (rand < 0.35f) {
 				currentWeather = WeatherType.cloudy;
 			} else {
 				currentWeather = WeatherType.rain;
 			}
 		} else if (currentWeather == WeatherType.rain) {
-			if (rand < 0.1f) {
+			if (rand < 0.3f) {
 				currentWeather = WeatherType.clear;
-			} else if (rand < 0.7f) {
+			} else if (rand < 0.35f) {
 				currentWeather = WeatherType.cloudy;
 			} else {
 				currentWeather = WeatherType.rain;

@@ -29,10 +29,10 @@ public class Plant_MasterManager : MonoBehaviour {
 		float dist = Vector3.Distance (transform.position, playerlocation.position);
 
 		//TODO: Make this a curve!
-		if (dist > 5f) {
-			speedmultiplier = 0.3f;
+		if (dist > 7.5f) {
+			speedmultiplier = 0.8f;
 		} else {
-			speedmultiplier = 5f - (4.7f * (dist / 5f));
+			speedmultiplier = 7.5f - (6.7f * (dist / 7.5f));
 		}
 
 
