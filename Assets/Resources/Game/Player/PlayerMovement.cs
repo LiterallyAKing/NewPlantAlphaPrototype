@@ -42,7 +42,9 @@ public class PlayerMovement : MonoBehaviour {
 		position += transform.position;
 		GridCoordinates coordinates = GridCoordinates.FromPosition (position);
 		GridCell cell = gridman.GetCell (coordinates);
-		destination = cell.transform.position;
+		if (cell != null) {
+			destination = cell.transform.position;
+		}
 	}
 
 

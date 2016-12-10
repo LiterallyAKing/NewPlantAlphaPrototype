@@ -182,6 +182,10 @@ public class GridManager : MonoBehaviour {
 	}
 	public GridCell GetCell(GridCoordinates coords){
 		int index = coords.X + (coords.Z * width);
+		if (index > cells.Length) {
+			return null;
+			//print ("Coordinate error for GetCell. X:" + coords.X + " Z:" + coords.Z);
+		}
 		return cells [index];
 	}
 
