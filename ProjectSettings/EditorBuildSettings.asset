@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/_SceneTemplate.unity
   - enabled: 0
     path: Assets/Test.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/NewPlantPrototype_100616/PlayablePlant.unity
