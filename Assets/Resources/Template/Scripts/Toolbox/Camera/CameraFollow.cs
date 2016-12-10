@@ -28,15 +28,16 @@ public class CameraFollow : MonoBehaviour
 
     private bool CheckXMargin()
     {
+		print (transform.position.x - m_Player.position.x);
         // Returns true if the distance between the camera and the player in the x axis is greater than the x margin.
         return Mathf.Abs(transform.position.x - m_Player.position.x) > xMargin;
     }
 
 
-    private bool CheckYMargin()
+    private bool CheckZMargin()
     {
         // Returns true if the distance between the camera and the player in the y axis is greater than the y margin.
-        return Mathf.Abs(transform.position.z - m_Player.position.z) > zMargin;
+		return Mathf.Abs(transform.position.z - m_Player.position.z - z_offset) > zMargin;
     }
 
 
@@ -60,7 +61,7 @@ public class CameraFollow : MonoBehaviour
         }
 
         // If the player has moved beyond the y margin...
-        if (CheckYMargin())
+        if (CheckZMargin())
         {
             // ... the target y coordinate should be a Lerp between the camera's current y position and the player's current y position.
 			targetZ = Mathf.Lerp(transform.position.z, m_Player.position.z - z_offset, zSmooth*Time.deltaTime);

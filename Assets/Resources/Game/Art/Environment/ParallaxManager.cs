@@ -74,9 +74,6 @@ public class ParallaxManager : MonoBehaviour {
 
 			//float x = Mathf.Repeat ((Time.time) * -1f * multiplier, 1);
 			Vector2 offset = new Vector2 (x, savedTextureOffset [i].y);
-			if (background_objs [i].name == "Mountains3") {
-				print (x);
-			}
 			background_mats [i].SetTextureOffset ("_MainTex", offset);
 			
 

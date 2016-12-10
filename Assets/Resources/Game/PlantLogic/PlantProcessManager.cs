@@ -17,10 +17,7 @@ public class PlantProcessManager : MonoBehaviour {
 			//DoPlantProcess ();
 		}
 	}
-
-	void DoPlantProcess(){
-		BroadcastMessage ("PlantLogicProcess");
-	}
+		
 
 
 }
