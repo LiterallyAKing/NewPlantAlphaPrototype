@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
+
 public class WeatherManager : MonoBehaviour {
 
 	public bool forceRain = false;
@@ -12,6 +14,8 @@ public class WeatherManager : MonoBehaviour {
 	public enum WeatherType {clear, cloudy, rain}
 	public WeatherType currentWeather = WeatherType.clear;
 	public WeatherType lastweather = WeatherType.clear;
+	public CC_Blend cameradarken;
+
 
 	int weatherTimer = 5;
 
@@ -24,7 +28,9 @@ public class WeatherManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (istweening) {
+			cameradarken.amount = tweenAmt;
+		}
 	}
 
 	public void ChangeWeather(){
@@ -112,10 +118,30 @@ public class WeatherManager : MonoBehaviour {
 
 
 
+
+			if (currentWeather == WeatherType.clear && (lastweather == WeatherType.cloudy || lastweather == WeatherType.rain)) {
+				TweenScreenDarken (0);
+			} else if ((currentWeather == WeatherType.cloudy || currentWeather == WeatherType.rain) && lastweather == WeatherType.clear) {
+				TweenScreenDarken (0.2f);
+			}
+
+
+
 		}
 
 
 			
 	}
+
+
+	float tweenAmt = 0;
+	bool istweening = false;
+	void TweenScreenDarken(float end){
+		istweening = true;
+		DOTween.To (() => tweenAmt, x => tweenAmt = x, end, 2f).OnComplete(()=> istweening = false);
+	}
+
+
+
 
 }
