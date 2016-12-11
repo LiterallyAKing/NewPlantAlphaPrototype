@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FarthestBack
+    uniqueID: 790989227
+    locked: 0
+  - name: Background
+    uniqueID: 3369945003
+    locked: 0
+  - name: BadgerSkin
+    uniqueID: 1657882655
+    locked: 0
+  - name: PlantsPlayer
+    uniqueID: 1565382353
+    locked: 0

@@ -40,6 +40,8 @@ public class Plant_LocationManager : MonoBehaviour {
 			mycell = mymanager.plantmanager.gridman.GetCell (coord);
 			mycellStats = mycell.GetComponent<GridStats> ();
 			mycell.plantincell = this;
+
+			mymanager.vizmanager.SetSortOrder (coord.Z);
 		}
 	}
 

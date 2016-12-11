@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	public AnimationCurve movementCurve;
 
+	public SpriteRenderer myspriterend;
+
 	// Use this for initialization
 	void Start () {
 		destination = transform.position;
@@ -21,6 +23,9 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		currentCell = CurrentlyOn (transform.position);
+
+		//TODO: if moving.
+		myspriterend.sortingOrder = GridCoordinates.FromPosition (transform.position).Z - 1;
 
 		if (Input.GetMouseButtonDown(0)) {
 			if(!EventSystem.current.IsPointerOverGameObject()){

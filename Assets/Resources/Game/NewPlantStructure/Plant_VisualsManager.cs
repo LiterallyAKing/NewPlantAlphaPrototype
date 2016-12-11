@@ -11,6 +11,12 @@ public class Plant_VisualsManager : MonoBehaviour {
 		plantParts [index].transform.DOScale (Vector3.one * percent, 1f);
 	}
 
+	public void SetSortOrder(int order){
+		for (int i = 0; i < plantParts.Length; i++) {
+			plantParts [i].GetComponentInChildren<MeshRenderer> ().sortingLayerName = "PlantsPlayer";
+			plantParts [i].GetComponentInChildren<MeshRenderer> ().sortingOrder = order;
+		}
+	}
 
 
 
