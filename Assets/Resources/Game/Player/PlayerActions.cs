@@ -18,7 +18,7 @@ public class PlayerActions : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown(1)) {
+		if (Input.GetMouseButtonDown(1) ) {
 
 
 			HandleInput ();
@@ -54,18 +54,39 @@ public class PlayerActions : MonoBehaviour {
 			if (inventory.carrying == false) {
 				if (gridman.GetCell (clickedcoord).occupied == true) {
 					if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Pick Up")) {
-						inventory.Pickup (gridman.GetCell (clickedcoord));
+						if (mymove.currentCell == gridman.GetCell (clickedcoord)) {
+							inventory.Pickup (gridman.GetCell (clickedcoord));
+						} else {
+							mymove.GoToCell (clickedcoord);
+							StopCoroutine ("WaitTillArrival");
+							StartCoroutine ("WaitTillArrival", "Pickup");
+						}
 						clicked = false;
 					}
 				}
 			} else {
 				if (gridman.GetCell (clickedcoord).occupied == false) {
 					if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Plant")) {
-						inventory.PutDown (gridman.GetCell (clickedcoord));
+						if (mymove.currentCell == gridman.GetCell (clickedcoord)) {
+							inventory.PutDown (gridman.GetCell (clickedcoord));
+						} else {
+							mymove.GoToCell (clickedcoord);
+							StopCoroutine ("WaitTillArrival");
+							StartCoroutine ("WaitTillArrival", "PutDown");
+						}
 						clicked = false;
 					}
 				}
 			}
+		}
+	}
+
+	IEnumerator WaitTillArrival(string action){
+		yield return new WaitUntil (() => mymove.currentCell.coordinates == clickedcoord);
+		if (action == "Pickup") {
+			inventory.Pickup (gridman.GetCell (clickedcoord));
+		} else {
+			inventory.PutDown (gridman.GetCell (clickedcoord));
 		}
 	}
 

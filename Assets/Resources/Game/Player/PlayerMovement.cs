@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public GridManager gridman;
 	Vector3 destination;
+	GridCoordinates destination_coord;
 	public float moveSpeed;
 	public GridCell currentCell;
 
@@ -18,14 +19,14 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
 		destination = transform.position;
 		currentCell = CurrentlyOn (transform.position);
+		destination_coord = currentCell.coordinates;
+		myspriterend.sortingOrder = 0; //GridCoordinates.FromPosition (transform.position).Z - 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		currentCell = CurrentlyOn (transform.position);
 
-		//TODO: if moving.
-		myspriterend.sortingOrder = GridCoordinates.FromPosition (transform.position).Z - 1;
 
 		if (Input.GetMouseButtonDown(0)) {
 			if(!EventSystem.current.IsPointerOverGameObject()){
@@ -54,9 +55,14 @@ public class PlayerMovement : MonoBehaviour {
 		position = transform.InverseTransformPoint(position);
 		position += transform.position;
 		GridCoordinates coordinates = GridCoordinates.FromPosition (position);
-		GridCell cell = gridman.GetCell (coordinates);
+		GoToCell (coordinates);
+	}
+
+	public void GoToCell (GridCoordinates coord){
+		GridCell cell = gridman.GetCell (coord);
 		if (cell != null) {
 			destination = cell.transform.position;
+			destination_coord = cell.coordinates;
 		}
 	}
 
