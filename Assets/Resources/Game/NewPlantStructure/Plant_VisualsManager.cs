@@ -13,8 +13,11 @@ public class Plant_VisualsManager : MonoBehaviour {
 
 	public void SetSortOrder(int order){
 		for (int i = 0; i < plantParts.Length; i++) {
-			plantParts [i].GetComponentInChildren<MeshRenderer> ().sortingLayerName = "PlantsPlayer";
-			plantParts [i].GetComponentInChildren<MeshRenderer> ().sortingOrder = order;
+			MeshRenderer[] meshes = plantParts [i].GetComponentsInChildren<MeshRenderer> ();
+			for (int j = 0; j < meshes.Length; j++) {
+				meshes[j].sortingLayerName = "PlantsPlayer";
+				meshes[j].sortingOrder = order;
+			}
 		}
 	}
 

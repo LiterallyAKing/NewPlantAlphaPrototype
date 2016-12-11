@@ -26,20 +26,23 @@ public class Plant_MasterManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float dist = Vector3.Distance (transform.position, playerlocation.position);
+		if (locmanager.moveState == Plant_LocationManager.MoveState.inground) {
 
-		//TODO: Make this a curve!
-		if (dist > 7.5f) {
-			speedmultiplier = 0.8f;
-		} else {
-			speedmultiplier = 7.5f - (6.7f * (dist / 7.5f));
-		}
+			float dist = Vector3.Distance (transform.position, playerlocation.position);
+
+			//TODO: Make this a curve!
+			if (dist > 7.5f) {
+				speedmultiplier = 0.8f;
+			} else {
+				speedmultiplier = 7.5f - (6.7f * (dist / 7.5f));
+			}
 
 
-		growthtimer += (Time.deltaTime * speedmultiplier);
-		if (growthtimer > growthdelay) {
-			planttypelogic.PlantProcess ();
-			growthtimer = 0f;
+			growthtimer += (Time.deltaTime * speedmultiplier);
+			if (growthtimer > growthdelay) {
+				planttypelogic.PlantProcess ();
+				growthtimer = 0f;
+			}
 		}
 	}
 

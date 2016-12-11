@@ -41,18 +41,21 @@ public class Plant_LocationManager : MonoBehaviour {
 			mycellStats = mycell.GetComponent<GridStats> ();
 			mycell.plantincell = this;
 
-			mymanager.vizmanager.SetSortOrder (coord.Z);
+
+			//mymanager.vizmanager.SetSortOrder (coord.Z);
+			mymanager.vizmanager.SetSortOrder (0);
 		}
 	}
 
 	public void Uproot(){
 		if (moveState == MoveState.inground) {
-			
+			mymanager.vizmanager.SetSortOrder (-1);
 			mycell.plantincell = null;
 			mycell = null;
 			mycellStats = null;
 			moveState = MoveState.carried;
 		}
 	}
+
 
 }

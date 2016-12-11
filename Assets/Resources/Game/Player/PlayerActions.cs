@@ -5,7 +5,9 @@ public class PlayerActions : MonoBehaviour {
 
 	public PlayerMovement mymove;
 	public GridManager gridman;
+	public PlantInventory inventory;
 	bool clicked = false;
+	GridCoordinates clickedcoord;
 	Vector2 menuLoc = Vector2.zero;
 
 	// Use this for initialization
@@ -24,7 +26,7 @@ public class PlayerActions : MonoBehaviour {
 	}
 
 	void HandleInput () {
-		clicked = true;
+		
 		menuLoc = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
 		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
@@ -32,7 +34,8 @@ public class PlayerActions : MonoBehaviour {
 			Vector3 position = hit.point;
 
 			GridCell cell = CellAtPosition (position);
-
+			clicked = true;
+			clickedcoord = cell.coordinates;
 			//cell.gameObject.SetActive (false);
 		}
 	}
@@ -47,11 +50,13 @@ public class PlayerActions : MonoBehaviour {
 
 	void OnGUI() {
 		if (clicked) {
-			if (GUI.Button(new Rect(menuLoc.x, Screen.height- menuLoc.y, 75, 50), "Pick Up"))
-				print("You clicked the button!");
-			
+			if (gridman.GetCell (clickedcoord).occupied) {
+				if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Pick Up")) {
+					inventory.Pickup (gridman.GetCell (clickedcoord));
+					clicked = false;
+				}
+			}
 		}
-
 	}
 
 }
