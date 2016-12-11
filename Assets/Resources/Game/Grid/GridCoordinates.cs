@@ -47,6 +47,13 @@ public struct GridCoordinates {
 		return new GridCoordinates(iX, iZ);
 	}
 
+	public static int DistanceBetweenCoord(GridCoordinates fromcoord, GridCoordinates tocoord){
+		int toreturn = 0;
+		int xdif = Mathf.Abs (fromcoord.X - tocoord.X);
+		int zdif = Mathf.Abs (fromcoord.Z - tocoord.Z);
+		toreturn = Mathf.Max (xdif, zdif);
+		return toreturn;
+	}
 
 	public static bool operator ==(GridCoordinates a, GridCoordinates b)
 	{

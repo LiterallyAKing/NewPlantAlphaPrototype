@@ -54,7 +54,8 @@ public class PlayerActions : MonoBehaviour {
 			if (inventory.carrying == false) {
 				if (gridman.GetCell (clickedcoord).occupied == true) {
 					if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Pick Up")) {
-						if (mymove.currentCell == gridman.GetCell (clickedcoord)) {
+						//if (mymove.currentCell == gridman.GetCell (clickedcoord)) {
+						if(GridCoordinates.DistanceBetweenCoord(mymove.currentCell.coordinates, clickedcoord) <= 1){
 							inventory.Pickup (gridman.GetCell (clickedcoord));
 						} else {
 							mymove.GoToCell (clickedcoord);
@@ -67,7 +68,8 @@ public class PlayerActions : MonoBehaviour {
 			} else {
 				if (gridman.GetCell (clickedcoord).occupied == false) {
 					if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Plant")) {
-						if (mymove.currentCell == gridman.GetCell (clickedcoord)) {
+						//if (mymove.currentCell == gridman.GetCell (clickedcoord)) {
+						if(GridCoordinates.DistanceBetweenCoord(mymove.currentCell.coordinates, clickedcoord) <= 1){
 							inventory.PutDown (gridman.GetCell (clickedcoord));
 						} else {
 							mymove.GoToCell (clickedcoord);
@@ -82,7 +84,7 @@ public class PlayerActions : MonoBehaviour {
 	}
 
 	IEnumerator WaitTillArrival(string action){
-		yield return new WaitUntil (() => mymove.currentCell.coordinates == clickedcoord);
+		yield return new WaitUntil (() => GridCoordinates.DistanceBetweenCoord(mymove.currentCell.coordinates, clickedcoord) <= 1);
 		if (action == "Pickup") {
 			inventory.Pickup (gridman.GetCell (clickedcoord));
 		} else {
