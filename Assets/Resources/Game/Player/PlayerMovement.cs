@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
 	Vector3 destination;
 	public float moveSpeed;
 	public GridCell currentCell;
+
+	public AnimationCurve movementCurve;
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +28,13 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 
-		transform.position = Vector3.MoveTowards (transform.position, destination, moveSpeed);
-
+		//transform.position = Vector3.MoveTowards (transform.position, destination, moveSpeed);
+		Vector3 velocity = Vector3.zero;
+		//transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, moveSpeed);
+		transform.DOMove (destination, 0.4f, false).SetEase(movementCurve);
+		//DG.Tweening.DOTween.To (() => transform.position, value => transform.position = value, destination, 5f).SetEase (Ease.InExpo);
+	
+	
 	}
 
 	void HandleInput () {
