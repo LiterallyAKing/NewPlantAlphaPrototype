@@ -23,7 +23,7 @@ public class WeatherManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		uiText.gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -98,15 +98,6 @@ public class WeatherManager : MonoBehaviour {
 				stat.baseWater = newwater;
 				stat.baseHeat = newheat;
 		}
-			string desc = "";
-			if (currentWeather == WeatherType.clear) {
-				desc = "Clear";
-			} else if (currentWeather == WeatherType.cloudy) {
-				desc = "Cloudy";
-			} else if (currentWeather == WeatherType.rain) {
-				desc = "Rain";
-			}
-			uiText.text = desc;
 
 			if (currentWeather == WeatherType.clear) {
 				raineffect.Stop ();
