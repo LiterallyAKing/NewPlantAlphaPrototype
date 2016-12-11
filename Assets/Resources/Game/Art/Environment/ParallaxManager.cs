@@ -24,6 +24,8 @@ public class ParallaxManager : MonoBehaviour {
 	float timer = 0;
 	private float scrollSpeedAdjust = 5000f;
 
+	[HideInInspector] public float rawdisplacement = 0;
+
 	// Use this for initialization
 	void Start () {
 		originalPos = transform.position;
@@ -60,7 +62,7 @@ public class ParallaxManager : MonoBehaviour {
 		}
 		float percent = timer / walkTime;
 		float displacement = walkcurve.Evaluate (percent) * walkMagnitude;
-
+		rawdisplacement = displacement;
 
 		for (int i = 0; i < background_objs.Length; i++) {
 			//Position
