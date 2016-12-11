@@ -40,6 +40,9 @@ public class ParallaxManager : MonoBehaviour {
 			originalPositions[i] = background_objs [i].transform.localPosition;
 			background_mats[i] = background_objs [i].GetComponent<MeshRenderer> ().material;
 			savedTextureOffset[i] = background_mats [i].GetTextureOffset ("_MainTex");
+
+
+
 		}
 
 		float maxSpeed = MaxAbsVal (scrollSpeeds);
@@ -67,7 +70,7 @@ public class ParallaxManager : MonoBehaviour {
 		for (int i = 0; i < background_objs.Length; i++) {
 			//Position
 			float localdisplace = displacement * movementPercent [i];
-			background_objs [i].transform.localPosition = originalPositions [i] + new Vector3 (0, originalPositions [i].y - displacement, 0);
+			background_objs [i].transform.localPosition = originalPositions [i] + new Vector3 (0, -localdisplace, 0);
 
 			//Scroll
 			float multiplier = scrollSpeeds [i];
