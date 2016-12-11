@@ -35,11 +35,17 @@ public class Plant_LocationManager : MonoBehaviour {
 			pos.x = coord.X * GridMetrics.innerRadius;
 			pos.y = 0f;
 			pos.z = coord.Z * GridMetrics.innerRadius;
+			if (this.transform.parent != mymanager.plantmanager.transform) {
+				this.transform.parent = mymanager.plantmanager.transform;
+			}
+
 			transform.localPosition = pos;
 			mycoord = coord;
+
 			mycell = mymanager.plantmanager.gridman.GetCell (coord);
 			mycellStats = mycell.GetComponent<GridStats> ();
 			mycell.plantincell = this;
+			moveState = MoveState.inground;
 
 
 			//mymanager.vizmanager.SetSortOrder (coord.Z);

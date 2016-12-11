@@ -19,7 +19,7 @@ public class PlantManager : MonoBehaviour {
 
 
 
-		CreatePlant (typeof(PlantType_Weed), new GridCoordinates (1, 5));
+		CreatePlant (typeof(PlantType_Weed), new GridCoordinates (25, 25));
 
 		for (int i = 0; i < gridman.width; i++) {
 			for (int j = 0; j < gridman.height; j++) {

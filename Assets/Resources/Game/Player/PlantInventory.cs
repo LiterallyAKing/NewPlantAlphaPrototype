@@ -9,7 +9,7 @@ public class PlantInventory : MonoBehaviour {
 
 	public Plant_LocationManager carriedplant;
 	public Transform carryspot;
-
+	public PlantManager plantman;
 
 	public void Pickup(GridCell fromcell){
 		if (fromcell.occupied) {
@@ -18,6 +18,13 @@ public class PlantInventory : MonoBehaviour {
 			carriedplant.transform.position = carryspot.position;
 			carriedplant.Uproot ();
 
+		}
+	}
+
+	public void PutDown(GridCell tocell){
+		if (tocell.occupied == false) {
+			carriedplant.SetMyGridLocation (tocell.coordinates);
+			carriedplant = null;
 		}
 	}
 }

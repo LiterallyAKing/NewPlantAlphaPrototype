@@ -34,9 +34,10 @@ public class PlayerActions : MonoBehaviour {
 			Vector3 position = hit.point;
 
 			GridCell cell = CellAtPosition (position);
-			clicked = true;
-			clickedcoord = cell.coordinates;
-			//cell.gameObject.SetActive (false);
+			if (cell != null) {
+				clicked = true;
+				clickedcoord = cell.coordinates;
+			}
 		}
 	}
 
@@ -50,10 +51,19 @@ public class PlayerActions : MonoBehaviour {
 
 	void OnGUI() {
 		if (clicked) {
-			if (gridman.GetCell (clickedcoord).occupied) {
-				if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Pick Up")) {
-					inventory.Pickup (gridman.GetCell (clickedcoord));
-					clicked = false;
+			if (inventory.carrying == false) {
+				if (gridman.GetCell (clickedcoord).occupied == true) {
+					if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Pick Up")) {
+						inventory.Pickup (gridman.GetCell (clickedcoord));
+						clicked = false;
+					}
+				}
+			} else {
+				if (gridman.GetCell (clickedcoord).occupied == false) {
+					if (GUI.Button (new Rect (menuLoc.x, Screen.height - menuLoc.y, 75, 50), "Plant")) {
+						inventory.PutDown (gridman.GetCell (clickedcoord));
+						clicked = false;
+					}
 				}
 			}
 		}
