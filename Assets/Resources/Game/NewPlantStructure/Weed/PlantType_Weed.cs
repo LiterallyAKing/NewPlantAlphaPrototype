@@ -4,18 +4,12 @@ using System.Collections.Generic;
 
 public class PlantType_Weed : PlantType_Base {
 
-	[HideInInspector] public Plant_MasterManager mymastermanager;
-	Plant_LocationManager locmanager;
-	Plant_VisualsManager vizman;
+
 	bool justBorn = true;
 
 	public int growthSteps;
 	int currentGrowthstep = 0;
 
-	void Start () {
-		locmanager = mymastermanager.locmanager;
-		vizman = mymastermanager.vizmanager;
-	}
 	
 	// Update is called once per frame
 	void Update () {

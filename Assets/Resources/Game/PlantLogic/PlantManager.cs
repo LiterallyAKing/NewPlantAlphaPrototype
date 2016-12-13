@@ -17,7 +17,7 @@ public class PlantManager : MonoBehaviour {
 		x_length = gridman.width;
 		z_length = gridman.height;
 
-
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (25, 30));
 
 		CreatePlant (typeof(PlantType_Weed), new GridCoordinates (25, 25));
 
