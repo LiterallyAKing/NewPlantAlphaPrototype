@@ -35,9 +35,11 @@ public class PlantType_Weed : PlantType_Base {
 				bool havePlanted = false;
 				for (int i = 0; i < neighbors.Count; i++) {
 					if (!havePlanted) {
-						if (mymastermanager.plantmanager.HowManyPlantsAroundCell (neighbors [i], this) >= 4) {
-							mymastermanager.plantmanager.CreatePlant (this.GetType (), neighbors [i].coordinates);
-							havePlanted = true;
+						if (!neighbors [i].occupied) {
+							if (mymastermanager.plantmanager.HowManyPlantsAroundCell (neighbors [i], this) >= 4) {
+								mymastermanager.plantmanager.CreatePlant (this.GetType (), neighbors [i].coordinates);
+								havePlanted = true;
+							}
 						}
 					}
 				}

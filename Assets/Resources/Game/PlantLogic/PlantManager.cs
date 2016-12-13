@@ -17,7 +17,12 @@ public class PlantManager : MonoBehaviour {
 		x_length = gridman.width;
 		z_length = gridman.height;
 
-		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (25, 30));
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (24, 33));
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (16, 30));
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (21, 23));
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (33, 15));
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (43, 25));
+		CreatePlant (typeof(PlantType_DeadTree), new GridCoordinates (39, 33));
 
 		CreatePlant (typeof(PlantType_Weed), new GridCoordinates (25, 25));
 
@@ -28,6 +33,14 @@ public class PlantManager : MonoBehaviour {
 				}
 			}
 		}
+		for (int i = 0; i < gridman.width; i++) {
+			for (int j = 0; j < gridman.height; j++) {
+				if (Random.value < 0.05f) {
+					CreatePlant (typeof(PlantType_Bush), new GridCoordinates (i, j));
+				}
+			}
+		}
+
 
 
 		}

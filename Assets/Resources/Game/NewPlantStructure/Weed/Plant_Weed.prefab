@@ -52,6 +52,7 @@ GameObject:
   - 4: {fileID: 4000011738177234}
   - 33: {fileID: 33000014203877018}
   - 23: {fileID: 23000010111173208}
+  - 114: {fileID: 114000012043204266}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -142,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 1000011403501546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.015, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011738177234}
@@ -272,6 +273,20 @@ MonoBehaviour:
   LightMod: 0
   WaterMod: 0
   HeatMod: 0
+--- !u!114 &114000012043204266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013694678756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd3775f327da10429205d601e2afb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos_perturbAmt: 0.05
+  scale_perturbPercent: 0.05
+  rotat_perturbAmt: 5
 --- !u!114 &114000013169001384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,4 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mymastermanager: {fileID: 114000011297970408}
+  locmanager: {fileID: 0}
+  vizman: {fileID: 0}
   growthSteps: 10
